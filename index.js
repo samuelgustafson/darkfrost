@@ -4,8 +4,12 @@ var server = express();
 var port =process.env.PORT || 8080;
 var apiKey = require('./secrets').darkskyAPIKey;
 var axios = require('axios');
-// apiKey
-// axios
+
+server.use(express.static(__dirname + '/public'));
+
+server.get('/', function(request, response){
+  response.sendFile('index.html', {root: __dirname + '/public/html'});
+});
 
 server.get('/weather/:lat,:lon', function(request, response){
   var  lat = request.params.lat;
